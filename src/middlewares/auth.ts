@@ -1,8 +1,8 @@
 import { supabase } from "@/lib/supabaseClient";
 import { Request, Response, NextFunction } from "express";
 
-export default async function AuthMiddleware(
-  req: Request<{ authorization: string }>,
+export default async function AuthMiddleware<T>(
+  req: Request<{ authorization: string } & T>,
   res: Response,
   next: NextFunction
 ): Promise<void> {

@@ -9,6 +9,6 @@ export default async function login(email: string, password: string) {
 
     if (error) throw error;
 
-    return data;
+    return data.session.access_token;
   } catch (error) {}
 }
