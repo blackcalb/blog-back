@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import createAuthUser from "src/sercives/auth/createAuthUser";
+import createAuthUser from "@/sercives/auth/createAuthUser";
 
 export default async function signupController(
   req: Request<any, { email: string; password: string }>,
