@@ -1,10 +1,11 @@
 import { supabase } from "@/lib/supabaseClient";
-import { ErrorPost } from "@/types";
+import { UpdatePostDTO } from "@/schemas/Post";
+import { ErrorPost, PostId, RecordPost } from "@/types";
 
 export default async function updatePost(
-  postId: string,
-  newData: Partial<{ title: string; content: string }>
-) {
+  postId: PostId,
+  newData: UpdatePostDTO
+): Promise<RecordPost> {
   const { error, data } = await supabase
     .from("Post")
     .update(newData)

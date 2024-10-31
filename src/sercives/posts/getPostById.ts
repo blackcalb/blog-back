@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
-import { ErrorTypes, RecordPost } from "@/types";
+import { ErrorTypes, PostId, RecordPost } from "@/types";
 
-export default async function getPostById(postId: string): Promise<RecordPost> {
+export default async function getPostById(postId: PostId): Promise<RecordPost> {
   const { error, data: post } = await supabase
     .from("Post")
     .select()

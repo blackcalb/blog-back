@@ -1,11 +1,10 @@
 import { supabase } from "@/lib/supabaseClient";
+import { CreatePostDTO } from "@/schemas/Post";
 import { ErrorPost, RecordPost } from "@/types";
 
-export default async function createPost(data: {
-  title: string;
-  content: string;
-  created_by: string;
-}): Promise<RecordPost> {
+export default async function createPost(
+  data: CreatePostDTO
+): Promise<RecordPost> {
   const { error, data: newPost } = await supabase
     .from("Post")
     .insert(data)

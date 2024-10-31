@@ -1,10 +1,11 @@
 import getPostById from "@/sercives/posts/getPostById";
+import { PostIdParam, RecordPost } from "@/types";
 import handleError from "@/utils/handleErrors";
 import { Request, Response } from "express";
 
 export default async function getPostController(
-  req: Request,
-  res: Response
+  req: Request<PostIdParam>,
+  res: Response<RecordPost>
 ): Promise<void> {
   try {
     const { postId } = req.params;

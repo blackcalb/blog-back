@@ -1,12 +1,12 @@
 import getAllCommentsFromPost from "@/sercives/comments/getAllCommentsFromPost";
-import { RecordComment } from "@/types";
+import { PostIdParam, RecordComment } from "@/types";
 import handleError from "@/utils/handleErrors";
 import { Request, Response } from "express";
 
 export default async function getAllCommentsFromPostController(
-  req: Request<{ postId: string }>,
+  req: Request<PostIdParam>,
   res: Response<RecordComment[]>
-): Promise<void> {
+) {
   const { postId } = req.params;
 
   try {

@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
+import { ErrorTypes } from "@/types";
 import { Request, Response, NextFunction } from "express";
 
 export default async function AuthMiddleware<T>(
@@ -9,7 +10,7 @@ export default async function AuthMiddleware<T>(
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    res.status(401).send({ error: "Unauthorized" });
+    res.status(401).send(ErrorTypes.UNAUTHORIZED);
     return;
   }
 
@@ -18,11 +19,10 @@ export default async function AuthMiddleware<T>(
   const { data, error } = await supabase.auth.getUser(token);
 
   if (error) {
-    res.status(401).send({ error: "Unauthorized" });
+    res.status(401).send(ErrorTypes.UNAUTHORIZED);
     return;
   }
 
-  // const authId = data.user.id;
   req.user = {
     id: data.user.id,
     email: data.user.email,

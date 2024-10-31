@@ -8,6 +8,7 @@ import getAllPostsControllerasync from "@/controller/posts/getAllPost.controller
 import getPostController from "@/controller/posts/getPost.controller";
 import putPostController from "@/controller/posts/putPost.controller";
 import AuthMiddleware from "@/middlewares/auth";
+import { PostIdAndCommentIdParam, PostIdParam } from "@/types";
 import { Router } from "express";
 
 export const postRouter = Router();
@@ -20,21 +21,18 @@ postRouter
 postRouter
   .route("/:postId")
   .get(getPostController)
-  .put(AuthMiddleware<{ postId: string }>, putPostController)
-  .delete(AuthMiddleware<{ postId: string }>, deletePostController);
+  .put(AuthMiddleware<PostIdParam>, putPostController)
+  .delete(AuthMiddleware<PostIdParam>, deletePostController);
 
 postRouter
   .route("/:postId/comments")
   .get(getAllCommentsFromPostController)
-  .post(AuthMiddleware<{ postId: string }>, createCommmetForPostController);
+  .post(AuthMiddleware<PostIdParam>, createCommmetForPostController);
 
 postRouter
   .route("/:postId/comments/:commentId")
-  .put(
-    AuthMiddleware<{ postId: string; commentId: string }>,
-    updateCommentFromPostController
-  )
+  .put(AuthMiddleware<PostIdAndCommentIdParam>, updateCommentFromPostController)
   .delete(
-    AuthMiddleware<{ postId: string; commentId: string }>,
+    AuthMiddleware<PostIdAndCommentIdParam>,
     deleteCommentFromPostController
   );

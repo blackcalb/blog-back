@@ -1,9 +1,10 @@
 import { supabase } from "@/lib/supabaseClient";
-import { ErrorComment, RecordComment } from "@/types";
+import { UpdateCommentDTO } from "@/schemas/Comments";
+import { CommentId, ErrorComment, RecordComment } from "@/types";
 
 export default async function updateCommentFromPost(
-  commentId: string,
-  data: { content: string }
+  commentId: CommentId,
+  data: UpdateCommentDTO
 ): Promise<RecordComment> {
   const { error, data: comment } = await supabase
     .from("Comment")

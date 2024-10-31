@@ -1,11 +1,11 @@
 import { supabase } from "@/lib/supabaseClient";
-import { ErrorTypes, RecordPost } from "@/types";
+import { CommentId, ErrorTypes, PostId, RecordComment } from "@/types";
 
 export default async function getCommentByIdAndPost(
-  postId: string,
-  commentId: string
-): Promise<RecordPost> {
-  const { error, data: post } = await supabase
+  postId: PostId,
+  commentId: CommentId
+): Promise<RecordComment> {
+  const { error, data: comment } = await supabase
     .from("Comment")
     .select()
     .eq("id", commentId)
@@ -16,9 +16,9 @@ export default async function getCommentByIdAndPost(
     throw new Error(ErrorTypes.INTERNAL_ERROR);
   }
 
-  if (!post?.length) {
+  if (!comment?.length) {
     throw new Error(ErrorTypes.NOT_FOUND);
   }
 
-  return post[0];
+  return comment[0];
 }

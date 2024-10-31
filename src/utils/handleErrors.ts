@@ -1,14 +1,20 @@
 import { ErrorTypes } from "@/types";
 import { Response } from "express";
 
-export default function handleError(error: any, res: Response) {
+function getErrorCode(error: any): number {
   if (error.message === ErrorTypes.INTERNAL_ERROR) {
-    res.status(500).send(error.message);
-    return;
+    return 500;
   }
   if (error.message === ErrorTypes.NOT_FOUND) {
-    res.status(404).send(error.message);
-    return;
+    return 404;
   }
-  res.status(400).send(error.message);
+  if (error.message === ErrorTypes.FORBIDDEN) {
+    return 403;
+  }
+  return 400;
+}
+
+export default function handleError(error: any, res: Response) {
+  const errorCode = getErrorCode(error);
+  res.status(errorCode).send({ message: error.message });
 }
