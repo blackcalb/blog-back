@@ -1,3 +1,7 @@
+import createCommmetForPostController from "@/controller/comments/createCommentForPost";
+import deleteCommentFromPostController from "@/controller/comments/deleteCommentFromPost";
+import getAllCommentsFromPostController from "@/controller/comments/getAllCommentsFromPost";
+import updateCommentFromPostController from "@/controller/comments/updateCommentFromPost";
 import createPostController from "@/controller/posts/createPost.controller";
 import deletePostController from "@/controller/posts/deletePost.controller";
 import getAllPostsControllerasync from "@/controller/posts/getAllPost.controller";
@@ -21,21 +25,16 @@ postRouter
 
 postRouter
   .route("/:postId/comments")
-  .get((req, res) => {
-    res.send("WIP").status(501);
-  })
-  .post((req, res) => {
-    res.send("WIP").status(501);
-  })
-  .delete((req, res) => {
-    res.send("WIP").status(501);
-  });
+  .get(getAllCommentsFromPostController)
+  .post(AuthMiddleware<{ postId: string }>, createCommmetForPostController);
 
 postRouter
   .route("/:postId/comments/:commentId")
-  .put((req, res) => {
-    res.send("WIP").status(501);
-  })
-  .delete((req, res) => {
-    res.send("WIP").status(501);
-  });
+  .put(
+    AuthMiddleware<{ postId: string; commentId: string }>,
+    updateCommentFromPostController
+  )
+  .delete(
+    AuthMiddleware<{ postId: string; commentId: string }>,
+    deleteCommentFromPostController
+  );
