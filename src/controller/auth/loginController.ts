@@ -13,8 +13,20 @@ export default async function loginController(
   try {
     const data = await login(email, password);
 
-    res.status(200).send(data);
+    if (!data) {
+      res.status(400).send({
+        code: "invalid_credentials",
+        message: "Invalid credentials",
+      });
+      return;
+    }
+
+    res.status(200).send({
+      auth_token: data,
+    });
   } catch (error) {
-    res.status(400).send("Fail to login");
+    res.status(500).send({
+      message: "Internal error, please try later",
+    });
   }
 }
