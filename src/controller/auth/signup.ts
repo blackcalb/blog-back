@@ -7,16 +7,11 @@ export default async function signupController(
 ): Promise<void> {
   try {
     const body = req.body;
-    console.log("🚀 ~ body:", body);
 
-    //TODO: validate body
-
-    const user = await createAuthUser(body.email, body.password);
-    console.log("🚀 ~ user:", user);
+    await createAuthUser(body.email, body.password);
 
     res.status(201).send({ message: "User created" });
   } catch (error: any) {
-    console.log("🚀 ~ error:", error.code);
     if (error.code === "user_already_exists") {
       res.status(400).send({
         code: "user_already_exists",

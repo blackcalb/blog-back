@@ -1,6 +1,7 @@
 import createCommmetForPostController from "@/controller/comments/createCommentForPost";
 import deleteCommentFromPostController from "@/controller/comments/deleteCommentFromPost";
 import getAllCommentsFromPostController from "@/controller/comments/getAllCommentsFromPost";
+import getCommentFromPostController from "@/controller/comments/getCommentFromPost";
 import updateCommentFromPostController from "@/controller/comments/updateCommentFromPost";
 import createPostController from "@/controller/posts/createPost.controller";
 import deletePostController from "@/controller/posts/deletePost.controller";
@@ -31,6 +32,7 @@ postRouter
 
 postRouter
   .route("/:postId/comments/:commentId")
+  .get(getCommentFromPostController)
   .put(AuthMiddleware<PostIdAndCommentIdParam>, updateCommentFromPostController)
   .delete(
     AuthMiddleware<PostIdAndCommentIdParam>,

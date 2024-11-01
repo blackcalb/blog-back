@@ -11,7 +11,6 @@ export default async function createPost(
     .select();
 
   if (error || !newPost.length) {
-    console.log(error, newPost);
     throw new Error(ErrorPost.CREATING);
   }
 
