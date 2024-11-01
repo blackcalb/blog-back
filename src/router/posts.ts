@@ -5,7 +5,7 @@ import getCommentFromPostController from "@/controller/comments/getCommentFromPo
 import updateCommentFromPostController from "@/controller/comments/updateCommentFromPost";
 import createPostController from "@/controller/posts/createPost.controller";
 import deletePostController from "@/controller/posts/deletePost.controller";
-import getAllPostsControllerasync from "@/controller/posts/getAllPost.controller";
+import getPostsControllerasync from "@/controller/posts/getPosts.controller";
 import getPostController from "@/controller/posts/getPost.controller";
 import putPostController from "@/controller/posts/putPost.controller";
 import AuthMiddleware from "@/middlewares/auth";
@@ -16,7 +16,7 @@ export const postRouter = Router();
 
 postRouter
   .route("/")
-  .get(getAllPostsControllerasync)
+  .get(getPostsControllerasync)
   .post(AuthMiddleware, createPostController);
 
 postRouter

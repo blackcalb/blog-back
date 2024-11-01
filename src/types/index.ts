@@ -37,3 +37,15 @@ export enum ErrorComment {
   DELETING = "Error deleting comment",
   UPDATING = "Error updating comment",
 }
+
+export interface PaginationOptions {
+  limit: number;
+  offset: number;
+}
+
+export interface PaginateResponse<T> {
+  offset: number;
+  limit: number;
+  total: number;
+  content: T[];
+}
